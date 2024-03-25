@@ -19,4 +19,5 @@ def criar_tabela():
         
 
 def listar_tabelas():
-    with open(f'tabelas/lstabelas.txt', 'r')
+    with open(f'tabelas/lstabelas.txt', 'r') as file:
+        file.read()
