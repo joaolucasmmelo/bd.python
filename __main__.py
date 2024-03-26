@@ -1,7 +1,7 @@
 from database import criar_tabela
 
 def cli():
-    print("Selecione um numero de 1 a 7 para prosseguir:")
+    print("\nSelecione um numero de 1 a 7 para prosseguir:\n")
     print("[1] - criar uma tabela")
     print("[2] - Listar todas as tabelas")
     print("[3] - Criar uma nova linha na tabela")
@@ -14,8 +14,8 @@ def cli():
     op = int(input())
 
     if op == 1:
-        print('OP1')
         criar_tabela()
+        cli()
     elif op == 2:
         print('OP2')
     elif op == 3:
@@ -29,9 +29,11 @@ def cli():
     elif op == 7:
         print('OP7')
     elif op == 0:
-        print('OP0')
+        exit("Saindo do programa...")
     else:
-        print("errado")
+        print("-----ESSA FUNÇÃO NÃO EXISTE!-----")
+        print("Selecione oma opção válida!\n")
+        cli()
 
 if __name__ == "__main__":
     cli()
