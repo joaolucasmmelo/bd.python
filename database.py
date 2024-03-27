@@ -1,37 +1,8 @@
 import os
-from enum import Enum
-import io
-from utils import tratar_nome
-
-class TiposChavesP(Enum):
-    caractere = str
-    inteiro = int
-    decimal = float
+from utils import tratar_nome, criar_chavep
 
 #Função Criar Tabela:
 def criar_tabela():
-
-    def valida_cptype():
-        cp_type = str(input())
-        cp_type = getattr(TiposChavesP, cp_type, None)
-
-        if cp_type is None:
-            print('\nEsse tipo não existe.')
-            print("Selecione um tipo válido! \nEx: caractere, inteiro ou decimal")
-            return valida_cptype()
-        return cp_type.value
-
-    def criar_chavep(file:io.TextIOWrapper):
-        cp_type = valida_cptype()
-        chave_p = str(input("Agora digite o nome chave primária: "))
-        try:
-            chave = cp_type(input("Digite uma chave: "))
-        except ValueError:
-            print(f'\nIsso não é um {cp_type}')
-            print("Digite o tipo da chave primária: \nEx: caractere, inteiro ou decimal")
-            return criar_chavep(file)
-        file.write(chave_p + ': ')
-        file.write(f'{chave}, ')
 
     nome = str(input("Digite o nome da tabela: "))
     nome = tratar_nome(nome)
@@ -48,16 +19,39 @@ def criar_tabela():
         criar_chavep(file)
 
     with open('tabelas/lstabelas.txt', 'a') as lista_tabelas:
-        lista_tabelas.write(f'{nome}; ')
+        lista_tabelas.write(f'{nome}\n')
 
 #Função Listar Tabelas:
 def listar_tabelas():
+    print("----------LISTA DE TABELAS----------\n")
+    try:
+        with open("tabelas/lstabelas.txt", 'r') as lista_tabelas:
+            check_file = os.path.getsize("tabelas/lstabelas.txt")
+            if check_file == 0:
+                print("Não existem tabelas a serem exibidas no momento.")
+                print("\n------------------------------------")
+            else:
+                print(lista_tabelas.read(None))
+                print("------------------------------------")
+
+    except FileNotFoundError:
+        print("Não existem tabelas a serem exibidas no momento.")
+        print("\n------------------------------------")
+
+#Função Criar Linha na Tabela:
+def criar_linha_tabela():
     pass
 
-# with open(file = f'tabelas/{nome}.txt',mode = 'w') as file:
-#         file.write("nigga")
-        
+#Função Listar Dados Tabela
+def listar_dados_tabela():
+    nome = str(input("Digite o nome da tabela que deseja ver: \n"))
+    nome = tratar_nome(nome)
 
-# def listar_tabelas():
-#     with open(f'tabelas/lstabelas.txt', 'r') as file:
-#         file.read()
+    try:
+        with open(f'tabelas/{nome}.txt', 'r') as tabela:
+            print(f'\n-----------Tabela {nome}-----------\n')
+            print(tabela.read(None))
+            print("\n------------------------------------")
+    except FileNotFoundError:
+        print("Essa tabela não exite!\n")
+        return

@@ -1,4 +1,4 @@
-from database import criar_tabela
+from database import criar_tabela, listar_tabelas, criar_linha_tabela, listar_dados_tabela
 
 def cli():
     print("\nSelecione um numero de 1 a 7 para prosseguir:\n")
@@ -17,11 +17,14 @@ def cli():
         criar_tabela()
         cli()
     elif op == 2:
-        print('OP2')
+        listar_tabelas()
+        cli()
     elif op == 3:
-        print('OP3')
+        criar_linha_tabela()
+        cli()
     elif op == 4:
-        print('OP4')
+        listar_dados_tabela()
+        cli()
     elif op == 5:
         print('OP5')
     elif op == 6:
