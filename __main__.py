@@ -1,4 +1,4 @@
-from database import criar_tabela, listar_tabelas, criar_linha_tabela, listar_dados_tabela
+from database import criar_tabela, listar_tabelas, criar_linha_tabela, listar_dados_tabela, apagar_tabela
 
 def cli():
     print("\nSelecione um numero de 1 a 7 para prosseguir:\n")
@@ -30,7 +30,8 @@ def cli():
     elif op == 6:
         print('OP6')
     elif op == 7:
-        print('OP7')
+        apagar_tabela()
+        cli()
     elif op == 0:
         exit("Saindo do programa...")
     else:

@@ -1,1 +1,1 @@
-altura: 1.8, 
+altura: 1.80, 
