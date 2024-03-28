@@ -20,6 +20,7 @@ def cli():
         listar_tabelas()
         cli()
     elif op == 3:
+        print("OP3")
         criar_linha_tabela()
         cli()
     elif op == 4:
