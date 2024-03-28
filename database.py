@@ -9,6 +9,7 @@ def criar_tabela():
 
     try:
         os.mknod(f'tabelas/{nome}.txt')
+
     except FileExistsError:
         print("Essa tabela já existe!\n")
         criar_tabela()
@@ -44,6 +45,7 @@ def criar_linha_tabela():
 
 #Função Listar Dados Tabela
 def listar_dados_tabela():
+    listar_tabelas()
     nome = str(input("Digite o nome da tabela que deseja ver: \n"))
     nome = tratar_nome(nome)
 
@@ -52,11 +54,35 @@ def listar_dados_tabela():
             print(f'\n-----------Tabela {nome}-----------\n')
             print(tabela.read(None))
             print("\n------------------------------------")
+
     except FileNotFoundError:
         print("Essa tabela não exite!\n")
+
+#Função Pesquisar Valor
+def pesquisar_valor():
+    listar_tabelas()
+    nome = str(input("Digite o nome da tabela em que deseja pesquisar um valor: \n"))
+    nome = tratar_nome(nome)
+    try:
+        with open(f'tabelas/{nome}.txt', 'r') as file:
+            busca = str(input('''Digite agora o "valor" que deseja buscar: '''))
+            r = file.readline()
+            i = 1
+            while r:
+                if busca in r:
+                    print("\nO valor foi encontrado.\n")
+                    print(r)
+                    return
+                i = i+1
+                r = file.readline()
+            print(f'\nO valor {busca} não foi encontrado na tabela {nome}.')     
+
+    except FileNotFoundError:
+        print("Essa tabela não existe.\n")
     
 #Função Apagar Tabela:
 def apagar_tabela():
+    listar_tabelas()
     nome = str(input("Digite o nome da tabela que deseja apagar: \n"))
     nome = tratar_nome(nome)
 

@@ -25,6 +25,7 @@ def criar_chavep(file:io.TextIOWrapper):
     chave_p = str(input("Agora digite o nome chave primária: "))
     try:
         chave = cp_type(input("Digite uma chave: "))
+        
     except ValueError:
         print(f'\nIsso não é um {cp_type}')
         print("Digite o tipo da chave primária: \nEx: caractere, inteiro ou decimal")
