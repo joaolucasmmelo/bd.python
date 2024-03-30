@@ -27,7 +27,6 @@ def cli():
         listar_dados_tabela()
         cli()
     elif op == 5:
-        print('OP5')
         pesquisar_valor()
         cli()
     elif op == 6:

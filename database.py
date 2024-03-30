@@ -15,9 +15,8 @@ def criar_tabela():
         criar_tabela()
 
     with open(f'tabelas/{nome}.txt', 'w') as file:
-        print("\nDigite o tipo da chave primária: ")
-        print("Ex: caractere, inteiro ou decimal")
-        criar_chavep(file)
+            print("\nDigite o tipo da chave primária")
+            criar_chavep(file, nome)
 
     with open('tabelas/lstabelas.txt', 'a') as lista_tabelas:
         lista_tabelas.write(f'{nome}\n')
