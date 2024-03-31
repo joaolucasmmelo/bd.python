@@ -27,15 +27,15 @@ def criar_chavep(file:io.TextIOWrapper, nome):
     colunas = int(input("Digite quantes colunas a tabela irá ter: "))
 
     try:
+        lista = []
         for i in range(colunas):
             chave = cp_type(input(f'Digite a chave {i+1}: '))
-            #r = file.readline()
-            # chave_test = ',' + str(chave) + ','
-            # while chave_test in r:
-            #     print(f'A chave {chave} já existe na tabela e não pode ser repetida!')
-            #     chave = cp_type(input(f'Digite outra chave {i+1}: '))
-            #     chave_test = ',' + str(chave) + ','
-            file.write(f'{chave},')
+            while chave in lista:
+                print(f'A chave {chave} já existe na tabela e não pode ser repetida!')
+                chave = cp_type(input(f'Digite outra chave {i+1}: '))
+            lista.append(chave)
+        for i in lista:
+            file.write(f'{i},')
         print(f'\nSucesso na criação da tabela {nome}.')
     except ValueError:
         print(f'\nIsso não é um {cp_type}, digite novamente o tipo da chave primária.')
