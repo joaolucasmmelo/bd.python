@@ -8,25 +8,25 @@ def criar_tabela():
     nome = tratar_nome(nome)
 
     try:
-        os.mknod(f'tabelas/{nome}.txt')
+        os.mknod(f'tabelas/{nome}.csv')
 
     except FileExistsError:
         print("Essa tabela já existe!\n")
         criar_tabela()
 
-    with open(f'tabelas/{nome}.txt', 'w') as file:
+    with open(f'tabelas/{nome}.csv', 'w+') as file:
             print("\nDigite o tipo da chave primária")
             criar_chavep(file, nome)
 
-    with open('tabelas/lstabelas.txt', 'a') as lista_tabelas:
+    with open('tabelas/lstabelas.csv', 'a') as lista_tabelas:
         lista_tabelas.write(f'{nome}\n')
 
 #Função Listar Tabelas:
 def listar_tabelas():
     print("----------LISTA DE TABELAS----------\n")
     try:
-        with open("tabelas/lstabelas.txt", 'r') as lista_tabelas:
-            check_file = os.path.getsize("tabelas/lstabelas.txt")
+        with open("tabelas/lstabelas.csv", 'r') as lista_tabelas:
+            check_file = os.path.getsize("tabelas/lstabelas.csv")
             if check_file == 0:
                 print("Não existem tabelas a serem exibidas no momento.")
                 print("\n------------------------------------")
@@ -49,7 +49,7 @@ def listar_dados_tabela():
     nome = tratar_nome(nome)
 
     try:
-        with open(f'tabelas/{nome}.txt', 'r') as tabela:
+        with open(f'tabelas/{nome}.csv', 'r') as tabela:
             print(f'\n-----------Tabela {nome}-----------\n')
             print(tabela.read(None))
             print("\n------------------------------------")
@@ -63,8 +63,9 @@ def pesquisar_valor():
     nome = str(input("Digite o nome da tabela em que deseja pesquisar um valor: \n"))
     nome = tratar_nome(nome)
     try:
-        with open(f'tabelas/{nome}.txt', 'r') as file:
+        with open(f'tabelas/{nome}.csv', 'r') as file:
             busca = str(input('''Digite agora o "valor" que deseja buscar: '''))
+            busca =' ' + busca + ', '
             r = file.readline()
             i = 1
             while r:
@@ -86,12 +87,12 @@ def apagar_tabela():
     nome = tratar_nome(nome)
 
     try:
-        with open(f'tabelas/{nome}.txt', 'r') as tabela:
+        with open(f'tabelas/{nome}.csv', 'r') as tabela:
             if tabela:
-                os.remove(f'tabelas/{nome}.txt')
+                os.remove(f'tabelas/{nome}.csv')
 
-        with open("tabelas/file_test.txt", 'w') as file_test:
-            with open("tabelas/lstabelas.txt", 'r') as lista_tabelas:
+        with open("tabelas/file_test.csv", 'w') as file_test:
+            with open("tabelas/lstabelas.csv", 'r') as lista_tabelas:
                 r = lista_tabelas.readline()
                 nome_tratado = nome + '\n'
                 while r:
@@ -100,13 +101,13 @@ def apagar_tabela():
                     
                     r = lista_tabelas.readline()
                     
-        with open("tabelas/lstabelas.txt", 'w') as lista_tabelas:
-            with open("tabelas/file_test.txt", 'r') as file_test:
+        with open("tabelas/lstabelas.csv", 'w') as lista_tabelas:
+            with open("tabelas/file_test.csv", 'r') as file_test:
                 r = file_test.readline()
                 while r:
                     lista_tabelas.write(f'{r}')
                     r = file_test.readline()
-            os.remove("tabelas/file_test.txt")  
+            os.remove("tabelas/file_test.csv")  
             print(f'Sucesso! tabela {nome} excluída\n')
 
         print("--------NOVA LISTA DE TABELAS--------")

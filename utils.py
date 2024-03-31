@@ -23,15 +23,20 @@ def valida_cptype():
 def criar_chavep(file:io.TextIOWrapper, nome):
     cp_type = valida_cptype()
     chave_p = str(input("Agora digite o nome chave primária: "))
-    file.write(chave_p + ': ')
+    file.write(chave_p + ',')
     colunas = int(input("Digite quantes colunas a tabela irá ter: "))
 
     try:
-        for i in range(colunas): 
+        for i in range(colunas):
             chave = cp_type(input(f'Digite a chave {i+1}: '))
-            file.write(f'{chave}, ')
+            #r = file.readline()
+            # chave_test = ',' + str(chave) + ','
+            # while chave_test in r:
+            #     print(f'A chave {chave} já existe na tabela e não pode ser repetida!')
+            #     chave = cp_type(input(f'Digite outra chave {i+1}: '))
+            #     chave_test = ',' + str(chave) + ','
+            file.write(f'{chave},')
         print(f'\nSucesso na criação da tabela {nome}.')
     except ValueError:
-        print(f'\nIsso não é um {cp_type}')
-        print("Digite o tipo da chave primária: \nEx: caractere, inteiro ou decimal")
-        return criar_chavep(file)
+        print(f'\nIsso não é um {cp_type}, digite novamente o tipo da chave primária.')
+        return criar_chavep(file, nome)
