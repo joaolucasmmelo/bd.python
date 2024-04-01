@@ -1,5 +1,5 @@
 import os
-from utils import tratar_nome, criar_chavep
+from utils import tratar_nome, criar_chavep, criar_chave
 
 #Função Criar Tabela:
 def criar_tabela():
@@ -40,7 +40,28 @@ def listar_tabelas():
 
 #Função Criar Linha na Tabela:
 def criar_linha_tabela():
-    pass
+    listar_tabelas()
+    nome = str(input("Digite o nome da tabela na qual deseja criar uma nova linha: \n"))
+    nome = tratar_nome(nome)
+
+    try:
+        with open(f'tabelas/{nome}.csv', 'r') as file:
+            r = file.readline()
+            virgula_count = -1
+            for i in r:
+                if i == ",":
+                    virgula_count+=1
+        with open(f'tabelas/{nome}.csv', 'a') as file:
+            file.write("\n")
+            print("\nDigite o tipo da chave")
+            criar_chave(file, virgula_count)
+            print(f'Tabela {nome}:\n')
+
+        with open(f'tabelas/{nome}.csv', 'r') as file:
+            print(file.read(None))
+
+    except FileNotFoundError:
+        print("Essa tabela não existe!\n")
 
 #Função Listar Dados Tabela
 def listar_dados_tabela():
@@ -65,11 +86,11 @@ def pesquisar_valor():
     try:
         with open(f'tabelas/{nome}.csv', 'r') as file:
             busca = str(input('''Digite agora o "valor" que deseja buscar: '''))
-            busca =' ' + busca + ', '
+            busca_tratado =',' + busca + ','
             r = file.readline()
             i = 1
             while r:
-                if busca in r:
+                if busca_tratado in r:
                     print("\nO valor foi encontrado.\n")
                     print(r)
                     return
