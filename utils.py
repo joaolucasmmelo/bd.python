@@ -20,11 +20,10 @@ def valida_ctype():
             return valida_ctype()
         return c_type.value
 
-def criar_chavep(file:io.TextIOWrapper, nome):
+def criar_chavep(file:io.TextIOWrapper, nome, colunas):
     c_type = valida_ctype()
     chave_p = str(input("Agora digite o nome chave primária: "))
     file.write(chave_p + ',')
-    colunas = int(input("Digite quantes colunas a tabela irá ter: "))
 
     try:
         lista = []
@@ -54,3 +53,4 @@ def criar_chave(file:io.TextIOWrapper, virgula_count):
     except ValueError:
         print(f'\nIsso não é um {c_type}, digite novamente o tipo da chave.')
         return criar_chave(file, virgula_count)
+    
